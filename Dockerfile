@@ -11,6 +11,7 @@ WORKDIR /app
 COPY --from=build /src/server /app/server
 COPY --from=build /src/static /app/static
 ENV PORT=8080
+ENV DB_PATH=/tmp/suggestions.db
 EXPOSE 8080
 USER nonroot:nonroot
 CMD ["/app/server"]

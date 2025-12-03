@@ -37,9 +37,14 @@ CREATE INDEX IF NOT EXISTS idx_suggestions_created_at ON suggestions (created_at
 `
 
 func main() {
-	db, err := initDB("suggestions.db")
+	dbPath := os.Getenv("DB_PATH")
+	if dbPath == "" {
+		dbPath = "/tmp/suggestions.db"
+	}
+
+	db, err := initDB(dbPath)
 	if err != nil {
-		log.Fatalf("init db: %v", err)
+		log.Fatalf("init db (%s): %v", dbPath, err)
 	}
 	defer db.Close()
 
@@ -53,7 +58,7 @@ func main() {
 		port = "8080"
 	}
 
-	log.Printf("Server starting on port %s\n", port)
+	log.Printf("Server starting on port %s (db: %s)\n", port, dbPath)
 	if err := http.ListenAndServe(":"+port, mux); err != nil {
 		log.Fatal(err)
 	}
