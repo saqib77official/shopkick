@@ -4,176 +4,249 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopkick - Coming Soon</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         body {
             margin: 0;
             font-family: 'Roboto', sans-serif;
-            background: linear-gradient(to bottom, #f0f4f8, #e3f2fd);
-            color: #333;
+            background: linear-gradient(135deg, #4b0082, #6a0dad, #8a2be2);
+            background-attachment: fixed;
+            color: #eee;
             line-height: 1.6;
             overflow-x: hidden;
         }
+
+        /* ---------------- HEADER ---------------- */
         header {
-            background: linear-gradient(135deg, #007bff, #0056b3);
+            background: linear-gradient(135deg, #8a2be2, #6a0dad);
             color: white;
             text-align: center;
-            padding: 120px 20px;
+            padding: 140px 25px;
             animation: fadeInDown 1s ease-out;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
         }
-        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInDown { 
+            from { opacity: 0; transform: translateY(-40px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+
         header h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 4em;
+            font-size: 4.2em;
             margin: 0;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
-            animation: pulse 2s infinite;
+            text-shadow: 0 0 25px rgba(255,255,255,0.6);
+            animation: pulse 2.5s infinite;
         }
-        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
-        header p { font-size: 1.6em; margin: 10px 0; }
+        @keyframes pulse { 
+            0%, 100% { transform: scale(1); } 
+            50% { transform: scale(1.05); } 
+        }
 
+        header p {
+            font-size: 1.5em;
+            opacity: 0.9;
+        }
+
+        /* ---------------- POWERED BY ---------------- */
         .powered-by {
             text-align: center;
-            padding: 40px 20px;
-            background: linear-gradient(135deg, #28a745, #20c997);
+            padding: 50px 20px;
+            background: linear-gradient(135deg, #9400d3, #6a0dad);
             color: white;
-            animation: fadeInUp 1s ease-out 0.5s both;
+            animation: fadeInUp 1s ease-out 0.4s both;
         }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { 
+            from { opacity: 0; transform: translateY(40px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+
         .powered-by img {
-            width: 130px;
-            height: 130px;
+            width: 140px;
+            height: 140px;
             border-radius: 50%;
             border: 5px solid white;
-            box-shadow: 0 0 25px rgba(255,255,255,0.6);
+            box-shadow: 0 0 25px rgba(255,255,255,0.7);
             animation: glow 2s ease-in-out infinite alternate;
         }
-        @keyframes glow { from { box-shadow: 0 0 25px rgba(255,255,255,0.6); } to { box-shadow: 0 0 35px rgba(255,255,255,0.9); } }
-        .powered-by h3 { margin: 15px 0 5px; font-size: 1.8em; }
+        @keyframes glow { 
+            from { box-shadow: 0 0 25px rgba(255,255,255,0.6); } 
+            to { box-shadow: 0 0 45px rgba(255,255,255,1); } 
+        }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-        section { margin: 60px 0; }
+        .powered-by h3 {
+            margin-top: 20px;
+            font-size: 1.9em;
+        }
+
+        /* ---------------- CONTENT ---------------- */
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 25px;
+        }
+
+        section { margin: 70px 0; }
+
         h2 {
             font-family: 'Playfair Display', serif;
-            color: #007bff;
+            color: #e5d3ff;
             text-align: center;
             opacity: 0;
             transform: translateY(20px);
-            transition: all 0.6s ease;
+            transition: all 0.8s ease;
+            font-size: 2.8em;
+            text-shadow: 0 0 15px rgba(0,0,0,0.5);
         }
         h2.animate { opacity: 1; transform: translateY(0); }
 
+        /* ---------------- CARDS ---------------- */
         .features-grid, .team-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            justify-items: center;
-        }
-        .card {
-            background: white;
-            border-radius: 15px;
-            padding: 30px 25px;
-            text-align: center;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        .card.animate { opacity: 1; transform: translateY(0); }
-        .card:hover {
-            transform: translateY(-12px) scale(1.03);
-            box-shadow: 0 15px 30px rgba(0,123,255,0.25);
-        }
-        .card i { font-size: 3.2em; color: #007bff; margin-bottom: 15px; }
-        .team-card img {
-            width: 150px; height: 150px; border-radius: 50%; object-fit: cover;
-            border: 5px solid #007bff; margin-bottom: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 35px;
         }
 
+        .card {
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 18px;
+            padding: 35px 25px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 0 30px rgba(0,0,0,0.3);
+            color: white;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: 0.6s ease;
+        }
+        .card.animate { opacity: 1; transform: translateY(0); }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 0 35px rgba(255,255,255,0.4);
+        }
+
+        .card i {
+            font-size: 3.2em;
+            margin-bottom: 15px;
+            color: #e1c3ff;
+        }
+
+        .team-card img {
+            width: 150px; height: 150px;
+            border-radius: 50%;
+            border: 5px solid #d7b3ff;
+            margin-bottom: 15px;
+            object-fit: cover;
+        }
+
+        /* ---------------- MESSAGE BOX ---------------- */
         .message {
-            background: white; border-radius: 15px; padding: 50px 30px; text-align: center;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1); font-size: 1.25em; font-style: italic;
-            opacity: 0; transform: translateY(20px); transition: all 0.6s ease;
+            background: rgba(255,255,255,0.15);
+            padding: 45px 30px;
+            font-size: 1.2em;
+            border-radius: 15px;
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.25);
+            box-shadow: 0 0 25px rgba(0,0,0,0.3);
+            opacity: 0;
+            transform: translateY(25px);
+            transition: 0.8s ease;
         }
         .message.animate { opacity: 1; transform: translateY(0); }
 
+        /* ---------------- FOOTER ---------------- */
         footer {
-            text-align: center; padding: 40px; background: linear-gradient(135deg, #007bff, #0056b3);
-            color: white; margin-top: 80px;
+            text-align: center;
+            padding: 45px;
+            margin-top: 100px;
+            background: linear-gradient(135deg, #6a0dad, #4b0082);
+            color: #f3e8ff;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.4);
         }
 
         @media (max-width: 768px) {
-            header { padding: 80px 10px; } h1 { font-size: 2.8em; }
-            .powered-by img { width: 110px; height: 110px; }
+            header { padding: 90px 15px; }
+            header h1 { font-size: 3em; }
         }
     </style>
 </head>
+
 <body>
 
     <header>
         <h1>Shopkick</h1>
         <p>Coming Soon!</p>
-        <p>Revolutionizing E-Commerce with Innovation and Excellence</p>
+        <p>Revolutionizing E-Commerce with Elegance & Innovation</p>
     </header>
 
     <div class="powered-by">
         <img src="https://github.com/saqib77official.png" alt="Saqib Ullah">
         <h3>Powered by Saqib Ullah</h3>
-        <p>The Visionary Behind Shopkick<br>github.com/saqib77official</p>
+        <p>The Visionary Behind Shopkick</p>
     </div>
-    
+
     <div class="container">
+
         <section id="message">
             <div class="message">
                 <h2>Welcome from Kompass Technologies Private Limited</h2>
-                <p>At Kompass Technologies Private Limited, our passionate team is building Shopkick — the next-generation e-commerce platform that’s fast, secure, and designed with you in mind. Get ready for a shopping experience like never before!</p>
+                <p>Our passionate team proudly presents Shopkick — a next-generation e-commerce platform built with speed, security, and a premium user experience. Stay tuned for something extraordinary!</p>
             </div>
         </section>
-        
+
         <section id="features">
             <h2>Upcoming Features</h2>
+
             <div class="features-grid">
-                <div class="card"><i class="fas fa-lock"></i><h3>Secure Shopping</h3><p>Bank-level encryption</p></div>
-                <div class="card"><i class="fas fa-store"></i><h3>Wide Product Range</h3><p>Everything you love</p></div>
-                <div class="card"><i class="fas fa-shopping-cart"></i><h3>Easy Checkout</h3><p>One-click & guest mode</p></div>
-                <div class="card"><i class="fas fa-truck"></i><h3>Fast Delivery</h3><p>Real-time tracking</p></div>
-                <div class="card"><i class="fas fa-mobile-alt"></i><h3>Mobile First</h3><p>Perfect on any device</p></div>
-                <div class="card"><i class="fas fa-star"></i><h3>Smart Recommendations</h3><p>Personalized for you</p></div>
+                <div class="card"><i class="fas fa-lock"></i><h3>Secure Shopping</h3><p>End-to-end encryption</p></div>
+                <div class="card"><i class="fas fa-store"></i><h3>Huge Product Catalog</h3><p>Everything you love</p></div>
+                <div class="card"><i class="fas fa-shopping-cart"></i><h3>Seamless Checkout</h3><p>Fast & intuitive</p></div>
+                <div class="card"><i class="fas fa-truck"></i><h3>Lightning Fast Delivery</h3><p>Real-time tracking</p></div>
+                <div class="card"><i class="fas fa-mobile-alt"></i><h3>Mobile Ready</h3><p>Smooth on every device</p></div>
+                <div class="card"><i class="fas fa-star"></i><h3>Smart AI Recommender</h3><p>Your favorites, curated</p></div>
             </div>
         </section>
-        
+
         <section id="team">
             <h2>Meet the Core Team</h2>
-            <p style="text-align:center;margin-bottom:40px;">The brilliant minds bringing Shopkick to life</p>
+            <p style="text-align:center;margin-bottom:40px;">Brilliant minds building the future of commerce</p>
+
             <div class="team-grid">
                 <div class="card team-card">
-                    <img src="https://github.com/saqib77official.png" alt="Saqib Ullah">
+                    <img src="https://github.com/saqib77official.png">
                     <h3>Saqib Ullah</h3>
-                    <p>Founder & Lead Developer<br>github.com/saqib77official</p>
+                    <p>Founder & Lead Developer</p>
                 </div>
+
                 <div class="card team-card">
-                    <img src="https://github.com/abdulsamad255.png" alt="Abdul Samad">
+                    <img src="https://github.com/abdulsamad255.png">
                     <h3>Abdul Samad</h3>
-                    <p>Full-Stack Developer<br>github.com/abdulsamad255</p>
+                    <p>Full-Stack Developer</p>
                 </div>
+
                 <div class="card team-card">
-                    <img src="https://github.com/amjiofficial.png" alt="AMJI Official">
+                    <img src="https://github.com/amjiofficial.png">
                     <h3>AMJI Official</h3>
-                    <p>Core Contributor<br>github.com/amjiofficial</p>
+                    <p>Core Contributor</p>
                 </div>
+
                 <div class="card team-card">
-                    <img src="https://github.com/fatehullah778866.png" alt="Fateh Ullah">
+                    <img src="https://github.com/fatehullah778866.png">
                     <h3>Fateh Ullah</h3>
-                    <p>Innovation Specialist<br>github.com/fatehullah778866</p>
+                    <p>Innovation Specialist</p>
                 </div>
             </div>
         </section>
+
     </div>
-    
+
     <footer>
         <p>© 2025 Kompass Technologies Private Limited. All rights reserved.</p>
-        <p>Islamabad, Pakistan | info@shopkick.com | Launching Soon – Stay Tuned!</p>
+        <p>Islamabad, Pakistan | info@shopkick.com</p>
     </footer>
 
     <script>
@@ -185,5 +258,6 @@
 
         document.querySelectorAll('h2, .card, .message').forEach(el => observer.observe(el));
     </script>
+
 </body>
 </html>
