@@ -134,6 +134,20 @@
         }
         .nav-spacer { height: 70px; }
         .loading { color: #9b968d; }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            .form-sticky {
+                position: static;
+                top: auto;
+            }
+            .list {
+                max-height: none;
+                overflow: visible;
+            }
+        }
     </style>
 </head>
 <body>
