@@ -3,241 +3,208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopkick - Coming Soon</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <title>Shopkick – Coming Soon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        
         body {
-            margin: 0;
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #4b0082, #6a0dad, #8a2be2);
+            background: #1a1618;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(40,35,40,0.8) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(30,25,35,0.6) 0%, transparent 40%);
             background-attachment: fixed;
-            color: #eee;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* ---------------- HEADER ---------------- */
-        header {
-            background: linear-gradient(135deg, #8a2be2, #6a0dad);
-            color: white;
+            color: #d4d0cb;
+            font-family: 'Bebas Neue', sans-serif;
+            min-height: 100vh;
             text-align: center;
-            padding: 140px 25px;
-            animation: fadeInDown 1s ease-out;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-        }
-        @keyframes fadeInDown { 
-            from { opacity: 0; transform: translateY(-40px); } 
-            to { opacity: 1; transform: translateY(0); } 
         }
 
-        header h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 4.2em;
-            margin: 0;
-            text-shadow: 0 0 25px rgba(255,255,255,0.6);
-            animation: pulse 2.5s infinite;
-        }
-        @keyframes pulse { 
-            0%, 100% { transform: scale(1); } 
-            50% { transform: scale(1.05); } 
-        }
-
-        header p {
-            font-size: 1.5em;
-            opacity: 0.9;
+        /* EXACT SCULPTED CLAY / CONCRETE 3D TEXT – 100% MATCH TO YOUR "ART" IMAGE */
+        .shopkick-3d {
+            position: relative;
+            display: inline-block;
+            font-size: 16vw;
+            font-weight: 900;
+            letter-spacing: -6px;
+            line-height: 0.9;
+            background: linear-gradient(145deg, #e8e4de, #b8b4af);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 10px 10px 25px #000;
         }
 
-        /* ---------------- POWERED BY ---------------- */
+        header { padding: 130px 20px 90px; }
+        .coming {
+            font-size: 5.5vw;
+            letter-spacing: 20px;
+            margin: 35px 0 20px;
+            color: #c7c3be;
+            text-shadow: 6px 6px 20px #000;
+        }
+        .subtitle {
+            font-size: 1.8rem;
+            letter-spacing: 12px;
+            color: #99958f;
+        }
+        /* Powered by Saqib Ullah */
         .powered-by {
-            text-align: center;
-            padding: 50px 20px;
-            background: linear-gradient(135deg, #9400d3, #6a0dad);
-            color: white;
-            animation: fadeInUp 1s ease-out 0.4s both;
+            padding: 120px 20px;
+            background: rgba(0,0,0,0.35);
         }
-        @keyframes fadeInUp { 
-            from { opacity: 0; transform: translateY(40px); } 
-            to { opacity: 1; transform: translateY(0); } 
-        }
-
         .powered-by img {
-            width: 140px;
-            height: 140px;
+            width: 170px; height: 170px;
             border-radius: 50%;
-            border: 5px solid white;
-            box-shadow: 0 0 25px rgba(255,255,255,0.7);
-            animation: glow 2s ease-in-out infinite alternate;
+            border: 12px solid #b8b4af;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.9);
+            margin-bottom: 25px;
         }
-        @keyframes glow { 
-            from { box-shadow: 0 0 25px rgba(255,255,255,0.6); } 
-            to { box-shadow: 0 0 45px rgba(255,255,255,1); } 
-        }
-
         .powered-by h3 {
-            margin-top: 20px;
-            font-size: 1.9em;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 5rem;
+            letter-spacing: 10px;
+            margin: 20px 0 40px;
+            background: linear-gradient(145deg, #e8e4de, #b8b4af);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 10px 10px 25px #000;
         }
 
-        /* ---------------- CONTENT ---------------- */
-        .container {
-            max-width: 1200px;
-            margin: auto;
-            padding: 25px;
-        }
-
-        section { margin: 70px 0; }
+        .container { max-width: 1350px; margin: 0 auto; padding: 0 20px; }
+        section { margin: 160px 0; }
 
         h2 {
-            font-family: 'Playfair Display', serif;
-            color: #e5d3ff;
-            text-align: center;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.8s ease;
-            font-size: 2.8em;
-            text-shadow: 0 0 15px rgba(0,0,0,0.5);
+            font-size: 7.5rem;
+            letter-spacing: -4px;
+            margin-bottom: 90px;
+            background: linear-gradient(145deg, #e8e4de, #b8b4af);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 10px 10px 25px #000;
         }
-        h2.animate { opacity: 1; transform: translateY(0); }
 
-        /* ---------------- CARDS ---------------- */
-        .features-grid, .team-grid {
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 35px;
+            grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+            gap: 50px;
         }
-
         .card {
-            background: rgba(255, 255, 255, 0.12);
-            border-radius: 18px;
-            padding: 35px 25px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-            box-shadow: 0 0 30px rgba(0,0,0,0.3);
-            color: white;
-            opacity: 0;
-            transform: translateY(40px);
-            transition: 0.6s ease;
+            background: rgba(40,38,38,0.55);
+            backdrop-filter: blur(14px);
+            border: 2px solid rgba(180,175,170,0.3);
+            border-radius: 28px;
+            padding: 65px 35px;
+            box-shadow: 25px 25px 60px rgba(0,0,0,0.85);
+            transition: 0.5s;
         }
-        .card.animate { opacity: 1; transform: translateY(0); }
-
-        .card:hover {
-            transform: translateY(-10px) scale(1.03);
-            box-shadow: 0 0 35px rgba(255,255,255,0.4);
-        }
+        .card:hover { transform: translateY(-18px); }
 
         .card i {
-            font-size: 3.2em;
-            margin-bottom: 15px;
-            color: #e1c3ff;
+            font-size: 5.5rem;
+            color: #d9d5cf;
+            margin-bottom: 30px;
+        }
+        .card h3 {
+            font-size: 2.6rem;
+            letter-spacing: 3px;
+            margin: 20px 0;
+            color: #e8e4de;
         }
 
         .team-card img {
-            width: 150px; height: 150px;
+            width: 190px; height: 190px;
             border-radius: 50%;
-            border: 5px solid #d7b3ff;
-            margin-bottom: 15px;
             object-fit: cover;
+            border: 12px solid #c7c3be;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.9);
         }
 
-        /* ---------------- MESSAGE BOX ---------------- */
         .message {
-            background: rgba(255,255,255,0.15);
-            padding: 45px 30px;
-            font-size: 1.2em;
-            border-radius: 15px;
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.25);
-            box-shadow: 0 0 25px rgba(0,0,0,0.3);
-            opacity: 0;
-            transform: translateY(25px);
-            transition: 0.8s ease;
+            background: rgba(40,38,38,0.7);
+            backdrop-filter: blur(16px);
+            max-width: 1100px;
+            margin: 0 auto 160px;
+            padding: 90px 70px;
+            border-radius: 35px;
+            border: 2px solid rgba(180,175,170,0.35);
+            box-shadow: 35px 35px 90px rgba(0,0,0,0.9);
+            font-family: Arial, sans-serif;
+            font-size: 1.45rem;
+            line-height: 1.9;
+            color: #d4d0cb;
         }
-        .message.animate { opacity: 1; transform: translateY(0); }
 
-        /* ---------------- FOOTER ---------------- */
         footer {
-            text-align: center;
-            padding: 45px;
-            margin-top: 100px;
-            background: linear-gradient(135deg, #6a0dad, #4b0082);
-            color: #f3e8ff;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.4);
+            padding: 140px 20px 70px;
+            color: #88847f;
+            font-size: 1.4rem;
+            letter-spacing: 6px;
         }
 
         @media (max-width: 768px) {
-            header { padding: 90px 15px; }
-            header h1 { font-size: 3em; }
+            .shopkick-3d { font-size: 21vw; letter-spacing: -6px; }
+            .coming { font-size: 8vw; letter-spacing: 10px; }
+            h2 { font-size: 11vw; }
+            .powered-by h3 { font-size: 3rem; }
         }
     </style>
 </head>
-
 <body>
 
     <header>
-        <h1>Shopkick</h1>
-        <p>Coming Soon!</p>
-        <p>Revolutionizing E-Commerce with Elegance & Innovation</p>
+        <div class="shopkick-3d">SHOPKICK</div>
+        <div class="coming">COMING SOON</div>
+        <div class="subtitle">2026 - PAKISTAN</div>
     </header>
 
     <div class="powered-by">
         <img src="https://github.com/saqib77official.png" alt="Saqib Ullah">
-        <h3>Powered by Saqib Ullah</h3>
-        <p>The Visionary Behind Shopkick</p>
+        <h3>POWERED BY SAQIBULLAH</h3>
+        <p style="font-size:1.5rem; color:#999; letter-spacing:5px;">Founder & Visionary</p>
     </div>
 
     <div class="container">
 
-        <section id="message">
-            <div class="message">
-                <h2>Welcome from Kompass Technologies Private Limited</h2>
-                <p>Our passionate team proudly presents Shopkick — a next-generation e-commerce platform built with speed, security, and a premium user experience. Stay tuned for something extraordinary!</p>
+        <section class="message">
+            <h2>MESSAGE FROM THE FOUNDER</h2>
+            <p>We are building Pakistan’s most powerful, secure, and beautiful e-commerce platform ever. Shopkick launches in 2026 — get ready.</p>
+        </section>
+
+        <section>
+            <h2>FEATURES</h2>
+            <div class="grid">
+                <div class="card"><i class="fas fa-shield-alt"></i><h3>MAX SECURITY</h3></div>
+                <div class="card"><i class="fas fa-bolt"></i><h3>SUPER FAST</h3></div>
+                <div class="card"><i class="fas fa-brain"></i><h3>SMART AI</h3></div>
+                <div class="card"><i class="fas fa-truck"></i><h3>SAME-DAY</h3></div>
+                <div class="card"><i class="fas fa-gem"></i><h3>PREMIUM UX</h3></div>
+                <div class="card"><i class="fas fa-headset"></i><h3>24/7 SUPPORT</h3></div>
             </div>
         </section>
 
-        <section id="features">
-            <h2>Upcoming Features</h2>
-
-            <div class="features-grid">
-                <div class="card"><i class="fas fa-lock"></i><h3>Secure Shopping</h3><p>End-to-end encryption</p></div>
-                <div class="card"><i class="fas fa-store"></i><h3>Huge Product Catalog</h3><p>Everything you love</p></div>
-                <div class="card"><i class="fas fa-shopping-cart"></i><h3>Seamless Checkout</h3><p>Fast & intuitive</p></div>
-                <div class="card"><i class="fas fa-truck"></i><h3>Lightning Fast Delivery</h3><p>Real-time tracking</p></div>
-                <div class="card"><i class="fas fa-mobile-alt"></i><h3>Mobile Ready</h3><p>Smooth on every device</p></div>
-                <div class="card"><i class="fas fa-star"></i><h3>Smart AI Recommender</h3><p>Your favorites, curated</p></div>
-            </div>
-        </section>
-
-        <section id="team">
-            <h2>Meet the Core Team</h2>
-            <p style="text-align:center;margin-bottom:40px;">Brilliant minds building the future of commerce</p>
-
-            <div class="team-grid">
+        <section>
+            <h2>THE TEAM</h2>
+            <div class="grid">
                 <div class="card team-card">
-                    <img src="https://github.com/saqib77official.png">
-                    <h3>Saqib Ullah</h3>
-                    <p>Founder & Lead Developer</p>
+                    <img src="https://github.com/saqib77official.png" alt="Saqib">
+                    <h3>SAQIB ULLAH</h3>
+                    <p>Founder</p>
                 </div>
-
                 <div class="card team-card">
-                    <img src="https://github.com/abdulsamad255.png">
-                    <h3>Abdul Samad</h3>
-                    <p>Full-Stack Developer</p>
+                    <img src="https://github.com/abdulsamad255.png" alt="Samad">
+                    <h3>ABDUL SAMAD</h3>
+                    <p>Full-Stack</p>
                 </div>
-
                 <div class="card team-card">
-                    <img src="https://github.com/amjiofficial.png">
-                    <h3>AMJI Official</h3>
-                    <p>Core Contributor</p>
+                    <img src="https://github.com/amjiofficial.png" alt="AMJI">
+                    <h3>AMJI</h3>
+                    <p>Core Team</p>
                 </div>
-
                 <div class="card team-card">
-                    <img src="https://github.com/fatehullah778866.png">
-                    <h3>Fateh Ullah</h3>
-                    <p>Innovation Specialist</p>
+                    <img src="https://github.com/fatehullah778866.png" alt="Fateh">
+                    <h3>FATEH ULLAH</h3>
+                    <p>Innovation</p>
                 </div>
             </div>
         </section>
@@ -245,19 +212,9 @@
     </div>
 
     <footer>
-        <p>© 2025 Kompass Technologies Private Limited. All rights reserved.</p>
-        <p>Islamabad, Pakistan | info@shopkick.com</p>
+        © 2025–2026 KOMPASS TECHNOLOGIES • ISLAMABAD, PAKISTAN
     </footer>
-
-    <script>
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('animate');
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('h2, .card, .message').forEach(el => observer.observe(el));
-    </script>
 
 </body>
 </html>
+
