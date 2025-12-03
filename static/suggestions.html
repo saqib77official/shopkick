@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopkick | Suggestions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="./nav.css">
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            background: #121013;
+            color: #e8e4de;
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+        }
+        .page {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px 80px;
+        }
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 2px;
+            font-size: 2.6rem;
+            margin: 20px 0 10px;
+        }
+        .subhead {
+            color: #bdb7ae;
+            margin-bottom: 24px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 22px;
+        }
+        .panel {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 18px 18px 24px;
+            box-shadow: 0 14px 38px rgba(0,0,0,0.45);
+        }
+        .form-sticky {
+            position: sticky;
+            top: 90px;
+            align-self: start;
+        }
+        label {
+            display: block;
+            font-weight: 600;
+            margin: 10px 0 6px;
+            color: #f1ede5;
+        }
+        input, textarea, button {
+            width: 100%;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.14);
+            background: rgba(255,255,255,0.05);
+            color: #f8f6f2;
+            padding: 12px 14px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+        }
+        input:focus, textarea:focus {
+            outline: 2px solid #1e90ff;
+            border-color: transparent;
+        }
+        textarea { min-height: 140px; resize: vertical; }
+        button {
+            cursor: pointer;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e90ff, #26c6da);
+            border: none;
+            margin-top: 12px;
+            box-shadow: 0 12px 28px rgba(30,144,255,0.35);
+            transition: transform 0.1s ease, box-shadow 0.2s ease;
+        }
+        button:hover { transform: translateY(-1px); box-shadow: 0 16px 32px rgba(30,144,255,0.45); }
+        button:active { transform: translateY(0); }
+        .list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 6px;
+            max-height: 65vh;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+        .item {
+            padding: 12px 14px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .item .name {
+            font-weight: 700;
+            color: #f8b400;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .item .name i { color: #26c6da; }
+        .item .text { margin-top: 6px; color: #d9d5cf; line-height: 1.5; }
+        .item-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .icon-btn {
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.05);
+            color: #e8e4de;
+            border-radius: 10px;
+            padding: 6px 10px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.95rem;
+            transition: all 0.15s ease;
+        }
+        .icon-btn i { color: #1e90ff; }
+        .icon-btn:hover {
+            background: rgba(255,255,255,0.12);
+            border-color: rgba(255,255,255,0.18);
+        }
+        .icon-btn:active { transform: translateY(0); }
+        .empty {
+            color: #9b968d;
+            font-style: italic;
+        }
+        .nav-spacer { height: 70px; }
+        .loading { color: #9b968d; }
+    </style>
+</head>
+<body>
+    <div id="site-nav"></div>
+    <div class="nav-spacer"></div>
+
+    <div class="page">
+        <h1><i class="fas fa-lightbulb"></i> Suggestions</h1>
+        <div class="subhead">Share your ideas. New submissions save to the server and appear on the right.</div>
+
+        <div class="grid">
+            <div class="panel form-sticky">
+                <form id="suggest-form">
+                    <label for="name">Name</label>
+                    <input id="name" name="name" type="text" placeholder="Your name" required>
+
+                    <label for="suggestion">Suggestion</label>
+                    <textarea id="suggestion" name="suggestion" placeholder="Tell us what to add or improve" required></textarea>
+
+                    <button type="submit"><i class="fas fa-paper-plane"></i> Submit</button>
+                </form>
+            </div>
+
+            <div class="panel suggestions-panel">
+                <div class="list" id="suggest-list">
+                    <div class="empty">Loading suggestions...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+      // Inject shared nav
+      fetch('nav.html').then(r => r.text()).then(html => { document.getElementById('site-nav').innerHTML = html; });
+
+      const form = document.getElementById('suggest-form');
+      const list = document.getElementById('suggest-list');
+      const apiBase = '/api/suggestions';
+
+      function renderItem(s) {
+        const el = document.createElement('div');
+        el.className = 'item';
+        el.dataset.id = s.id;
+        el.innerHTML = `
+          <div class="name"><i class="fas fa-user"></i> ${s.name || 'Anonymous'}</div>
+          <div class="text">${s.suggestion}</div>
+          <div class="item-actions">
+            <button class="icon-btn" data-action="edit"><i class="fas fa-pen"></i><span>Edit</span></button>
+            <button class="icon-btn" data-action="delete"><i class="fas fa-trash"></i><span>Delete</span></button>
+          </div>
+        `;
+        return el;
+      }
+
+      function setEmpty(message) {
+        list.innerHTML = `<div class="empty">${message}</div>`;
+      }
+
+      async function loadSuggestions() {
+        try {
+          const res = await fetch(apiBase);
+          if (!res.ok) throw new Error('failed');
+          const data = await res.json();
+          if (!Array.isArray(data) || data.length === 0) {
+            setEmpty('No suggestions yet. Be the first!');
+            return;
+          }
+          list.innerHTML = '';
+          data.forEach(s => list.appendChild(renderItem(s)));
+        } catch (err) {
+          setEmpty('Could not load suggestions.');
+        }
+      }
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const name = (form.name.value || 'Anonymous').trim();
+        const text = form.suggestion.value.trim();
+        if (!text) return;
+        try {
+          const res = await fetch(apiBase, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, suggestion: text })
+          });
+          if (!res.ok) throw new Error('failed');
+          const saved = await res.json();
+          if (list.querySelector('.empty')) list.innerHTML = '';
+          list.prepend(renderItem(saved));
+          form.reset();
+        } catch (err) {
+          alert('Could not save suggestion. Please try again.');
+        }
+      });
+
+      list.addEventListener('click', async (e) => {
+        const btn = e.target.closest('.icon-btn');
+        if (!btn) return;
+        const item = btn.closest('.item');
+        if (!item) return;
+        const id = item.dataset.id;
+        const textEl = item.querySelector('.text');
+
+        if (btn.dataset.action === 'delete') {
+          const ok = confirm('Delete this suggestion?');
+          if (!ok) return;
+          try {
+            const res = await fetch(`${apiBase}/${id}`, { method: 'DELETE' });
+            if (!res.ok) throw new Error('failed');
+            item.remove();
+            if (!list.children.length) setEmpty('No suggestions yet. Be the first!');
+          } catch (err) {
+            alert('Could not delete. Please try again.');
+          }
+          return;
+        }
+
+        if (btn.dataset.action === 'edit') {
+          const current = textEl ? textEl.textContent : '';
+          const updated = prompt('Edit suggestion:', current);
+          if (updated === null) return;
+          const trimmed = updated.trim();
+          if (!trimmed) {
+            alert('Suggestion cannot be empty.');
+            return;
+          }
+          try {
+            const res = await fetch(`${apiBase}/${id}`, {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ suggestion: trimmed })
+            });
+            if (!res.ok) throw new Error('failed');
+            const saved = await res.json();
+            if (textEl) textEl.textContent = saved.suggestion;
+          } catch (err) {
+            alert('Could not update. Please try again.');
+          }
+        }
+      });
+
+      loadSuggestions();
+    </script>
+</body>
+</html>

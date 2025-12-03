@@ -6,6 +6,7 @@
     <title>Shopkick – Coming Soon</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="./nav.css">
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
         
@@ -15,10 +16,27 @@
                 radial-gradient(circle at 20% 80%, rgba(40,35,40,0.8) 0%, transparent 50%),
                 radial-gradient(circle at 80% 20%, rgba(30,25,35,0.6) 0%, transparent 40%);
             background-attachment: fixed;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
             color: #d4d0cb;
             font-family: 'Bebas Neue', sans-serif;
             min-height: 100vh;
+            min-height: 100svh;
             text-align: center;
+        }
+
+
+        .logo-wrap {
+            display: inline-flex;
+            justify-content: center;
+            padding: 0;
+            margin-bottom: 18px;
+        }
+        .logo-wrap svg {
+            width: min(960px, 95vw);
+            height: auto;
+            display: block;
         }
 
         /* EXACT SCULPTED CLAY / CONCRETE 3D TEXT – 100% MATCH TO YOUR "ART" IMAGE */
@@ -35,7 +53,13 @@
             text-shadow: 10px 10px 25px #000;
         }
 
-        header { padding: 130px 20px 90px; }
+        header {
+            padding: 130px 20px 90px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
         .coming {
             font-size: 5.5vw;
             letter-spacing: 20px;
@@ -151,9 +175,80 @@
     </style>
 </head>
 <body>
+    <div id="site-nav"></div>
+    <script>fetch('nav.html').then(r=>r.text()).then(html=>{document.getElementById('site-nav').innerHTML=html});</script>
 
     <header>
-        <div class="shopkick-3d">SHOPKICK</div>
+        <div class="logo-wrap">
+            <svg width="960" height="360" viewBox="0 0 960 360" xmlns="http://www.w3.org/2000/svg" aria-label="Shopkick">
+              <defs>
+                <style>
+                  :root {
+                    --blue: #1e90ff;
+                    --yellow: #f8b400;
+                    --red: #e53935;
+                    --green: #2ecc71;
+                    --purple: #8e44ad;
+                    --orange: #ff7043;
+                    --cyan: #26c6da;
+                    --pink: #ec407a;
+                    --shadow: rgba(0,0,0,0.32);
+                    --contact: rgba(0,0,0,0.20);
+                    --reflection: rgba(0,0,0,0.10);
+                    --font: 'Arial Black', 'Helvetica Black', Impact, sans-serif;
+                  }
+                  text {
+                    font-family: var(--font);
+                    font-size: 220px;
+                    font-weight: 900;
+                    dominant-baseline: middle;
+                    text-anchor: middle;
+                  }
+                  .extrude {
+                    filter:
+                      drop-shadow(-1px 0px var(--shadow))
+                      drop-shadow(-2px -1px var(--shadow))
+                      drop-shadow(-3px -2px var(--shadow))
+                      drop-shadow(-4px -3px var(--shadow))
+                      drop-shadow(-5px -4px var(--shadow))
+                      drop-shadow(-6px -5px var(--shadow))
+                      drop-shadow(-7px -6px var(--shadow))
+                      drop-shadow(-8px -7px var(--shadow))
+                      drop-shadow(-9px -8px var(--shadow))
+                      drop-shadow(-10px -9px var(--shadow))
+                      drop-shadow(-11px -10px var(--shadow))
+                      drop-shadow(-12px -11px var(--shadow));
+                  }
+                </style>
+              </defs>
+              <rect x="0" y="210" width="960" height="150" fill="#eef1f4"/>
+              <g opacity="0.85" transform="translate(-6,-4)">
+                <ellipse cx="110" cy="246" rx="85" ry="14" fill="var(--contact)"/>
+                <ellipse cx="215" cy="246" rx="85" ry="14" fill="var(--contact)"/>
+                <ellipse cx="335" cy="246" rx="90" ry="14" fill="var(--contact)"/>
+                <ellipse cx="450" cy="246" rx="90" ry="14" fill="var(--contact)"/>
+                <ellipse cx="565" cy="246" rx="90" ry="14" fill="var(--contact)"/>
+                <ellipse cx="680" cy="246" rx="85" ry="14" fill="var(--contact)"/>
+                <ellipse cx="790" cy="246" rx="85" ry="14" fill="var(--contact)"/>
+                <ellipse cx="885" cy="246" rx="85" ry="14" fill="var(--contact)"/>
+              </g>
+              <linearGradient id="refl" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="var(--reflection)"/>
+                <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+              </linearGradient>
+              <rect x="0" y="220" width="960" height="70" fill="url(#refl)"/>
+              <g class="extrude" transform="translate(0,12)">
+                <text x="110" y="200" fill="var(--blue)">S</text>
+                <text x="215" y="200" fill="var(--yellow)">H</text>
+                <text x="335" y="200" fill="var(--red)">O</text>
+                <text x="450" y="200" fill="var(--green)">P</text>
+                <text x="565" y="200" fill="var(--purple)">K</text>
+                <text x="680" y="200" fill="var(--orange)">I</text>
+                <text x="790" y="200" fill="var(--cyan)">C</text>
+                <text x="885" y="200" fill="var(--pink)">K</text>
+              </g>
+            </svg>
+        </div>
         <div class="coming">COMING SOON</div>
         <div class="subtitle">2026 - PAKISTAN</div>
     </header>
