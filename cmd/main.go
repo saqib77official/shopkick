@@ -62,6 +62,21 @@ func main() {
 	if err := http.ListenAndServe(":"+port, mux); err != nil {
 		log.Fatal(err)
 	}
+	http.HandleFunc("/download-db", func(w http.ResponseWriter, r *http.Request) {
+		dbFile := "shopkick.db" // your DB file
+
+		data, err := os.ReadFile(dbFile)
+		if err != nil {
+			http.Error(w, "Cannot read DB: "+err.Error(), 500)
+			return
+		}
+
+		w.Header().Set("Content-Type", "application/octet-stream")
+		w.Header().Set("Content-Disposition", "attachment; filename=shopkick.db")
+
+		w.Write(data)
+	})
+
 }
 
 func initDB(path string) (*sql.DB, error) {
