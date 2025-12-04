@@ -3,6 +3,7 @@ package main
 import (
 	"database/sql"
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -37,6 +38,7 @@ CREATE INDEX IF NOT EXISTS idx_suggestions_created_at ON suggestions (created_at
 `
 
 func main() {
+	// Decide where the SQLite DB file lives
 	dbPath := os.Getenv("DB_PATH")
 	if dbPath == "" {
 		dbPath = "/tmp/suggestions.db"
@@ -49,10 +51,18 @@ func main() {
 	defer db.Close()
 
 	mux := http.NewServeMux()
+
+	// API routes
 	mux.Handle("/api/suggestions", suggestionsCollection(db))
 	mux.Handle("/api/suggestions/", suggestionItem(db))
+
+	// 🔹 New: endpoint to download the SQLite DB file
+	mux.Handle("/download-db", downloadDBHandler(dbPath))
+
+	// Static site (landing page, etc.)
 	mux.Handle("/", http.FileServer(http.Dir("./static")))
 
+	// Cloud Run port
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
@@ -62,21 +72,6 @@ func main() {
 	if err := http.ListenAndServe(":"+port, mux); err != nil {
 		log.Fatal(err)
 	}
-	http.HandleFunc("/download-db", func(w http.ResponseWriter, r *http.Request) {
-		dbFile := "shopkick.db" // your DB file
-
-		data, err := os.ReadFile(dbFile)
-		if err != nil {
-			http.Error(w, "Cannot read DB: "+err.Error(), 500)
-			return
-		}
-
-		w.Header().Set("Content-Type", "application/octet-stream")
-		w.Header().Set("Content-Disposition", "attachment; filename=shopkick.db")
-
-		w.Write(data)
-	})
-
 }
 
 func initDB(path string) (*sql.DB, error) {
@@ -92,6 +87,22 @@ func initDB(path string) (*sql.DB, error) {
 		return nil, err
 	}
 	return db, nil
+}
+
+// 🔹 New: handler to download the SQLite file from the container
+func downloadDBHandler(dbPath string) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		data, err := os.ReadFile(dbPath)
+		if err != nil {
+			log.Printf("error reading db file %s: %v", dbPath, err)
+			http.Error(w, fmt.Sprintf("cannot read db file: %v", err), http.StatusInternalServerError)
+			return
+		}
+
+		w.Header().Set("Content-Type", "application/octet-stream")
+		w.Header().Set("Content-Disposition", "attachment; filename=suggestions.db")
+		w.Write(data)
+	})
 }
 
 func suggestionsCollection(db *sql.DB) http.Handler {
